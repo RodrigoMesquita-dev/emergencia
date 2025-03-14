@@ -4,24 +4,27 @@ export default new Vuex.Store({
     state: {
         titulo: 'Emergências Médicas',
         equipe: {
-            enfermeiro: 'Nome do enfermeiro',
-            socorrista: 'Nome do socorrista',
-            medico: 'Nome do médico',
-            carro: 'Placa do carro',
-            telefone: '+55 11 00000-0000',
-            kitDeReanimacao: 'Kit 0001'
+            enfermeiro: '',
+            socorrista: '',
+            medico: '',
+            carro: '',
+            telefone: '',
+            kitDeReanimacao: ''
         },
         enfermeiros: [
             { id: 1, nome: 'João', escala: '12x36'},
             { id: 2, nome: 'Maria', escala: '12x36'},
             { id: 3, nome: 'Ana', escala: '24x48'},
-            { id: 4, nome: 'José', escala: '24x48'}
+            { id: 4, nome: 'José', escala: '24x48'},
+            { id: 5, nome: 'Felipe', escala: '12x36'},
         ],
         socorristas: [
             { id: 1, nome: 'Marcos', turno: 'manhã'},
             { id: 2, nome: 'Felipe', turno: 'tarde'},
             { id: 3, nome: 'Cláudia', turno: 'tarde'},
-            { id: 4, nome: 'Michele', turno: 'noite'}
+            { id: 4, nome: 'Michele', turno: 'noite'},
+            { id: 5, nome: 'Pedro', turno: 'manhã'},
+            { id: 6, nome: 'Miguel', turno: 'manhã'}
         ],
         medicos: [
             { id: 1, nome: 'André', escala: '12x36'},
@@ -51,13 +54,26 @@ export default new Vuex.Store({
         }
     },
     getters: {
-      totalEnfermeiros(state) {
-        return state.enfermeiros.length;
-      },
-      socorristasPorTurno(state) { // closutre
-        return turno => !turno ? state.socorristas : state.socorristas.filter(s => s.turno === turno);
-      },
-      totalSocorristas: state => state.socorristas.length,
-      totalSocorristasPorTurno: (state, getters) => turno => getters.socorristasPorTurno(turno).length
+        totalEnfermeiros(state) {
+            return state.enfermeiros.length
+        },
+        socorristasPorTurno(state) { //closure
+            return turno => !turno ? state.socorristas : state.socorristas.filter(s => s.turno === turno)
+        },
+        totalSocorristas: state => state.socorristas.length,
+        totalSocorristasPorTurno: (state, getters) => turno => getters.socorristasPorTurno(turno).length
+    },
+    mutations: {
+        setItemEquipe: (state, item) => {
+            let t = item.tipo
+            let d = item.dados
+
+            if(t == 'enfermeiros') state.equipe.enfermeiro = d.nome
+            if(t == 'socorristas') state.equipe.socorrista = d.nome
+            if(t == 'medicos') state.equipe.medico = d.nome
+            if(t == 'carros') state.equipe.carro = d.placa
+            if(t == 'telefones') state.equipe.telefone = d.telefone
+            if(t == 'kits-de-reanimacao') state.equipe.kitDeReanimacao = d.kit
+        }
     }
 })
