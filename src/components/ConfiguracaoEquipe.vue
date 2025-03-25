@@ -31,32 +31,39 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
 export default {
     name: 'ConfiguracaoEquipe',
     data: () => ({
       titulo: 'Configuração da equipe'
     }),
+    /* computed: mapState(['equipe'])
     computed: {
-      ...mapState({
-        enfermeiro: state => state.equipe.enfermeiro,
-        socorrista: state => state.equipe.socorrista,
-        medico: state => state.equipe.medico,
-        carro: state => state.equipe.carro,
-        telefone: state => state.equipe.telefone,
-        kitDeReanimacao: state => state.equipe.kitDeReanimacao,
-        tituloCustomizadoLocal(state) {
-          return `${this.titulo} - ${state.equipe.carro}`
-        }
-      }),
-      corTitulo() {
-        let testeLogico = true
-        if (testeLogico) {
-          return 'text-danger'
-        }
-        return 'text-primary'
+      e() {
+        return this.$store.state.equipe
       }
     }
+    */
+   computed: {
+    ...mapState({
+      enfermeiro: state => state.equipe.enfermeiro,
+      socorrista: state => state.equipe.socorrista,
+      medico: state => state.equipe.medico,
+      carro: state => state.equipe.carro,
+      telefone: state => state.equipe.telefone,
+      kitDeReanimacao: state => state.equipe.kitDeReanimacao,
+      tituloCustomizadoLocal(state) {
+        return `${this.titulo} - ${state.equipe.carro}`
+      } 
+    }),
+    corTitulo() {
+      let testeLogico = true
+      if(testeLogico) {
+        return 'text-danger'
+      }
+      return 'text-primary'
+    }
+  }
 }
 </script>
