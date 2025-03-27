@@ -29,7 +29,11 @@ export default {
     methods: {
         // ...mapMutations(['setItemEquipe']),
         ...mapMutations({
-          x: 'setItemEquipe'
+          x: 'setItemEquipe',
+          setItemEquipeComVerificacao: (commit, payload) => {
+            // camada de logica
+            commit('setItemEquipe', payload);
+          }
         }),
         adicionarItemEquipe() {
             let item = {
@@ -43,7 +47,8 @@ export default {
             //   item,
             //   })
             // this.setItemEquipe({ item });
-            this.x({ item });
+            // this.x({ item });
+            this.setItemEquipeComVerificacao(item);
         },
         adicionarItemEquipeAbordagemIncorreta() {
 
