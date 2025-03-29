@@ -54,12 +54,30 @@ export default new Vuex.Store({
         setTitulo: (state, payload) => state.titulo = payload
     },
     actions: {
-        adicionarEquipamentos(context, payload) {
-          const { carros, kitsDeReanimacao, telefones } = payload;
-          // processamento assíncrono.
-          context.commit('setCarros', carros);
-          context.commit('setKitsDeReanimacao', kitsDeReanimacao);
-          context.commit('setTelefones', telefones);
+        fetchEquipamentos(context) {
+            fetch('http://localhost:3001/equipamentos')
+                .then(res => res.json())
+                .then(dados => {
+                    context.commit('setCarros', dados.carros);
+                    context.commit('setKitsDeReanimacao', dados.kitsDeReanimacao);
+                    context.commit('setTelefones', dados.telefones);
+                    
+                })
+                .catch(err => console.log(err.message))
+        },
+        fetchProfissionais(context) {    
+            fetch('http://localhost:3001/enfermeiros')
+                .then(res => res.json())
+                .then(dados => context.commit('setCarros', dados))
+                .catch(err => console.log(err.message))
+            fetch('http://localhost:3001/socorristas')
+                .then(res => res.json())
+                .then(dados => context.commit('setKitsDeReanimação', dados))
+                .catch(err => console.log(err.message))
+            fetch('http://localhost:3001/medicos')
+                .then(res => res.json())
+                .then(dados => context.commit('setTelefones', dados))
+                .catch(err => console.log(err.message))
         }
     }
 })

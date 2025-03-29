@@ -61,6 +61,8 @@ export default {
     ...mapMutations(['setEnfermeiros', 'setSocorristas', 'setMedicos' ])
   },
   created() {
+    this.$store.dispatch('fetchEquipamentos');
+
     fetch('http://localhost:3001/enfermeiros')
       .then(res => res.json())
       .then(dados => this.setEnfermeiros(dados))
@@ -72,12 +74,6 @@ export default {
     fetch('http://localhost:3001/medicos')
       .then(res => res.json())
       .then(dados => this.setMedicos(dados))
-      .catch(err => console.log(err.message))
-    fetch('http://localhost:3001/equipamentos')
-      .then(res => res.json())
-      .then(dados => {
-        this.$store.dispatch('adicionarEquipamentos', dados)
-      })
       .catch(err => console.log(err.message))
   }
 }
