@@ -58,16 +58,24 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setEnfermeiros', 'setSocorristas', 'setMedicos' ])
+    ...mapMutations(['setEnfermeiros', 'setSocorristas', 'setMedicos' ]),
+    // ...mapActions(['fetchEquipamentos','fetchProfissionais'])
+    ...mapActions({ fetchEquipamentos: 'fetchEquipamentos', fetchProfissionais: 'fetchProfissionais'})
   },
   created() {
-    this.$store.dispatch({
-      type: 'fetchEquipamentos',
+    // this.$store.dispatch({
+    //   type: 'fetchEquipamentos',
+    //   carros: true,
+    //   kitsDeReanimacao: true,
+    //   telefone: true
+    // });
+    // this.$store.dispatch('fetchProfissionais');
+    this.fetchEquipamentos({
       carros: true,
       kitsDeReanimacao: true,
       telefone: true
     });
-    this.$store.dispatch('fetchProfissionais');
+    this.fetchProfissionais();
   }
 }
 </script>
