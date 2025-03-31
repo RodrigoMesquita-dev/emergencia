@@ -54,14 +54,14 @@ export default new Vuex.Store({
         setTitulo: (state, payload) => state.titulo = payload
     },
     actions: {
-        fetchEquipamentos(context) {
+        fetchEquipamentos(context, { carros, kitsDeReanimacao, telefone}) {
+            console.log(payload)
             fetch('http://localhost:3001/equipamentos')
                 .then(res => res.json())
                 .then(dados => {
-                    context.commit('setCarros', dados.carros);
-                    context.commit('setKitsDeReanimacao', dados.kitsDeReanimacao);
-                    context.commit('setTelefones', dados.telefones);
-                    
+                    if(carros) context.commit('setCarros', dados.carros);
+                    if(kitsDeReanimacao) context.commit('setKitsDeReanimacao', dados.kitsDeReanimacao);
+                    if(telefone) context.commit('setTelefones', dados.telefones);
                 })
                 .catch(err => console.log(err.message))
         },
