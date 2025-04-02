@@ -68,6 +68,13 @@ export default {
       if (this.kitDeReanimacao) return 'uti.png'
       if (this.carro) return 'simples.png'
       return 'indefinida.png'
+    },
+    methods: {
+      montarEquipe() {
+        let equipe = Object.assign({}, this.$store.state.equipe)
+
+        this.$store.commit('adicionarEquipe', equipe)
+      }
     }
   }
 }

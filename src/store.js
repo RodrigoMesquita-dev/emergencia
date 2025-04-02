@@ -52,7 +52,11 @@ export default new Vuex.Store({
         setCarros: (state, payload) => state.equipamentos.carros = payload,
         setTelefones: (state, payload) => state.equipamentos.telefones = payload,
         setKitsDeReanimacao: (state, payload) => state.equipamentos.kitsDeReanimacao = payload,
-        setTitulo: (state, payload) => state.titulo = payload
+        setTitulo: (state, payload) => state.titulo = payload,
+        adicionarEquipe: (state, payload) => {
+            state.equipes.push(payload);
+            state.equipe = {}
+        },
     },
     actions: {
         fetchEquipamentos(context, { carros, kitsDeReanimacao, telefone}) {
