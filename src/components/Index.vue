@@ -60,7 +60,10 @@ export default {
   methods: {
     ...mapMutations(['setEnfermeiros', 'setSocorristas', 'setMedicos' ]),
     // ...mapActions(['fetchEquipamentos','fetchProfissionais'])
-    ...mapActions({ fetchEquipamentos: 'fetchEquipamentos', fetchProfissionais: 'fetchProfissionais'})
+    ...mapActions({ fetchEquipamentos: (dispatch, payload) => {
+      // implementar lógica
+      dispatch('fetchEquipamentos', payload);
+    }, fetchProfissionais: 'fetchProfissionais'})
   },
   created() {
     // this.$store.dispatch({

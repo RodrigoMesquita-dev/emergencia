@@ -11,6 +11,7 @@ export default new Vuex.Store({
             telefone: '',
             kitDeReanimacao: ''
         },
+        equipes: [],
         enfermeiros: [],
         socorristas: [],
         medicos: [],
